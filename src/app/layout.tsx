@@ -10,6 +10,9 @@ const inter = Inter({
 export const metadata: Metadata = {
   title: "FastDrop Cab | Book Your Taxi Instantly",
   description: "Fast, Safe & Always On Time. Book your taxi instantly via WhatsApp.",
+  icons: {
+    icon: "/favicon.png",
+  },
 };
 
 export const viewport: Viewport = {

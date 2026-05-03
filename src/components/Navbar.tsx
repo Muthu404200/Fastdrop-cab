@@ -33,7 +33,7 @@ export default function Navbar() {
     src="/l1.svg"
     alt="FastDrop Cab Logo"
     width={280}
-    height={240}
+    height={180}
     className="object-contain"
   />
             {/* Fast<span className="text-primary">Drop</span> add logo */}

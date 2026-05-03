@@ -5,6 +5,7 @@ import QuickContact from "@/components/QuickContact";
 import WhyChooseUs from "@/components/WhyChooseUs";
 import PopularRoutes from "@/components/PopularRoutes";
 import TrustSection from "@/components/TrustSection";
+import TariffSection from "@/components/TariffSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 
@@ -18,6 +19,7 @@ export default function Home() {
         <QuickContact />
         <WhyChooseUs />
         <PopularRoutes />
+        <TariffSection />
         <TrustSection />
         <CTA />
       </main>
