@@ -8,7 +8,7 @@ interface PricingCardProps {
   price: number;
   from: string;
   to: string;
-  onBook: (vehicleName: string) => void;
+  onBook: () => void;
 }
 
 export default function PricingCard({ vehicleName, price, from, to, onBook }: PricingCardProps) {
@@ -39,7 +39,7 @@ export default function PricingCard({ vehicleName, price, from, to, onBook }: Pr
       </div>
 
       <button
-        onClick={() => onBook(vehicleName)}
+        onClick={onBook}
         className="w-full py-4 rounded-xl font-bold text-lg bg-white/5 text-white group-hover:bg-[#FFC107] group-hover:text-[#0B0F14] transition-colors duration-300 relative z-10"
       >
         Book Now

@@ -12,9 +12,11 @@ interface PricingSectionProps {
 export default function PricingSection({ route }: PricingSectionProps) {
   const [isModalOpen, setIsModalOpen] = useState(false);
   const [selectedVehicle, setSelectedVehicle] = useState("SEDAN");
+  const [selectedCabDetails, setSelectedCabDetails] = useState("");
 
-  const handleBook = (vehicleName: string) => {
+  const handleBook = (vehicleName: string, price: number) => {
     setSelectedVehicle(vehicleName);
+    setSelectedCabDetails(`${vehicleName} — Book ${route.from} to ${route.to} — ₹${price}`);
     setIsModalOpen(true);
   };
 
@@ -26,28 +28,28 @@ export default function PricingSection({ route }: PricingSectionProps) {
           price={route.prices.sedan}
           from={route.from}
           to={route.to}
-          onBook={handleBook}
+          onBook={() => handleBook("SEDAN", route.prices.sedan)}
         />
         <PricingCard
           vehicleName="ETIOS"
           price={route.prices.etios}
           from={route.from}
           to={route.to}
-          onBook={handleBook}
+          onBook={() => handleBook("ETIOS", route.prices.etios)}
         />
         <PricingCard
           vehicleName="SUV"
           price={route.prices.suv}
           from={route.from}
           to={route.to}
-          onBook={handleBook}
+          onBook={() => handleBook("SUV", route.prices.suv)}
         />
         <PricingCard
           vehicleName="INNOVA"
           price={route.prices.innova}
           from={route.from}
           to={route.to}
-          onBook={handleBook}
+          onBook={() => handleBook("INNOVA", route.prices.innova)}
         />
       </div>
 
@@ -57,6 +59,7 @@ export default function PricingSection({ route }: PricingSectionProps) {
         from={route.from}
         to={route.to}
         selectedVehicle={selectedVehicle}
+        selectedCabDetails={selectedCabDetails}
       />
     </>
   );

@@ -5,6 +5,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import TariffTabs from "./TariffTabs";
 import { TariffCard, LocalPackageCard } from "./TariffCard";
 import { MessageCircle } from "lucide-react";
+import BookingModal from "./BookingModal";
 
 const oneWayData = [
   { name: "SEDAN", price: "14", driverBata: "400", toll: "One Way Toll" },
@@ -58,6 +59,21 @@ const tabs = [
 
 export default function TariffSection() {
   const [activeTab, setActiveTab] = useState("one-way");
+  const [isModalOpen, setIsModalOpen] = useState(false);
+  const [selectedVehicle, setSelectedVehicle] = useState("SEDAN");
+  const [selectedCabDetails, setSelectedCabDetails] = useState("");
+
+  const handleBookTariff = (item: any) => {
+    setSelectedVehicle(item.name.replace("ONLY ", ""));
+    setSelectedCabDetails(`${item.name} — Rs.${item.price}/km — Rs.${item.driverBata} Driver Bata — ${item.toll}`);
+    setIsModalOpen(true);
+  };
+
+  const handleBookPackage = (packageDuration: string) => {
+    setSelectedVehicle("SEDAN");
+    setSelectedCabDetails(`Local Package — ${packageDuration}`);
+    setIsModalOpen(true);
+  };
 
   return (
     <section className="py-20 bg-[#0B0F14] relative overflow-hidden" id="tariffs">
@@ -110,6 +126,7 @@ export default function TariffSection() {
                         pricePerKm={item.price}
                         driverBata={item.driverBata}
                         toll={item.toll}
+                        onBook={() => handleBookTariff(item)}
                       />
                     ))}
                   </div>
@@ -133,7 +150,12 @@ export default function TariffSection() {
                             <td className="py-5 px-8 text-gray-300">Rs.{item.driverBata}</td>
                             <td className="py-5 px-8 text-gray-300">{item.toll}</td>
                             <td className="py-5 px-8 text-right">
-                              <button className="px-6 py-2 rounded-xl bg-white/5 text-white hover:bg-[#FFC107] hover:text-[#0B0F14] transition-all font-medium">Book</button>
+                              <button 
+                                onClick={() => handleBookTariff(item)}
+                                className="px-6 py-2 rounded-xl bg-white/5 text-white hover:bg-[#FFC107] hover:text-[#0B0F14] transition-all font-medium"
+                              >
+                                Book
+                              </button>
                             </td>
                           </tr>
                         ))}
@@ -154,6 +176,7 @@ export default function TariffSection() {
                         pricePerKm={item.price}
                         driverBata={item.driverBata}
                         toll={item.toll}
+                        onBook={() => handleBookTariff(item)}
                       />
                     ))}
                   </div>
@@ -177,7 +200,12 @@ export default function TariffSection() {
                             <td className="py-5 px-8 text-gray-300">Rs.{item.driverBata}</td>
                             <td className="py-5 px-8 text-gray-300">{item.toll}</td>
                             <td className="py-5 px-8 text-right">
-                              <button className="px-6 py-2 rounded-xl bg-white/5 text-white hover:bg-[#FFC107] hover:text-[#0B0F14] transition-all font-medium">Book</button>
+                              <button 
+                                onClick={() => handleBookTariff(item)}
+                                className="px-6 py-2 rounded-xl bg-white/5 text-white hover:bg-[#FFC107] hover:text-[#0B0F14] transition-all font-medium"
+                              >
+                                Book
+                              </button>
                             </td>
                           </tr>
                         ))}
@@ -194,6 +222,7 @@ export default function TariffSection() {
                       key={idx}
                       packageDuration={item.package}
                       prices={item.prices}
+                      onBook={() => handleBookPackage(item.package)}
                     />
                   ))}
                 </div>
@@ -220,6 +249,13 @@ export default function TariffSection() {
           </a>
         </motion.div>
       </div>
+
+      <BookingModal
+        isOpen={isModalOpen}
+        onClose={() => setIsModalOpen(false)}
+        selectedVehicle={selectedVehicle}
+        selectedCabDetails={selectedCabDetails}
+      />
     </section>
   );
 }

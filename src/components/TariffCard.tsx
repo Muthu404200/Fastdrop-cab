@@ -5,9 +5,10 @@ interface TariffCardProps {
   pricePerKm: string | number;
   driverBata: string | number;
   toll: string;
+  onBook?: () => void;
 }
 
-export function TariffCard({ vehicleName, pricePerKm, driverBata, toll }: TariffCardProps) {
+export function TariffCard({ vehicleName, pricePerKm, driverBata, toll, onBook }: TariffCardProps) {
   return (
     <div className="group relative bg-[#131A22] rounded-2xl p-6 border border-white/5 transition-all duration-300 hover:scale-[1.02] hover:border-[#FFC107]/50 hover:shadow-[0_0_20px_rgba(255,193,7,0.15)] flex flex-col h-full">
       <div className="flex items-center gap-4 mb-4">
@@ -36,8 +37,10 @@ export function TariffCard({ vehicleName, pricePerKm, driverBata, toll }: Tariff
           </p>
         </div>
       </div>
-      
-      <button className="mt-6 w-full py-3 rounded-xl bg-white/5 text-white font-medium group-hover:bg-[#FFC107] group-hover:text-[#0B0F14] transition-colors duration-300">
+      <button 
+        onClick={onBook}
+        className="mt-6 w-full py-3 rounded-xl bg-white/5 text-white font-medium group-hover:bg-[#FFC107] group-hover:text-[#0B0F14] transition-colors duration-300"
+      >
         Book Now
       </button>
     </div>
@@ -52,9 +55,10 @@ interface LocalPackagePrice {
 interface LocalPackageCardProps {
   packageDuration: string;
   prices: LocalPackagePrice[];
+  onBook?: () => void;
 }
 
-export function LocalPackageCard({ packageDuration, prices }: LocalPackageCardProps) {
+export function LocalPackageCard({ packageDuration, prices, onBook }: LocalPackageCardProps) {
   return (
     <div className="group relative bg-[#131A22] rounded-2xl p-6 border border-white/5 transition-all duration-300 hover:scale-[1.02] hover:border-[#FFC107]/50 hover:shadow-[0_0_20px_rgba(255,193,7,0.15)] flex flex-col h-full">
       <div className="mb-5 pb-4 border-b border-white/10 text-center">
@@ -72,8 +76,10 @@ export function LocalPackageCard({ packageDuration, prices }: LocalPackageCardPr
           </div>
         ))}
       </div>
-      
-      <button className="mt-6 w-full py-3 rounded-xl bg-white/5 text-white font-medium group-hover:bg-[#FFC107] group-hover:text-[#0B0F14] transition-colors duration-300">
+      <button 
+        onClick={onBook}
+        className="mt-6 w-full py-3 rounded-xl bg-white/5 text-white font-medium group-hover:bg-[#FFC107] group-hover:text-[#0B0F14] transition-colors duration-300"
+      >
         Book Package
       </button>
     </div>
