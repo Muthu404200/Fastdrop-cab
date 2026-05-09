@@ -16,10 +16,10 @@ export default function Home() {
       <Navbar />
       <main className="flex-1 flex flex-col">
         <Hero />
-        <QuickContact />
-        <WhyChooseUs />
-        <PopularRoutes />
         <TariffSection />
+        <QuickContact />
+        <PopularRoutes />
+        <WhyChooseUs />
         <TrustSection />
         <CTA />
       </main>

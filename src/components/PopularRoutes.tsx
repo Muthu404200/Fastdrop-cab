@@ -9,28 +9,64 @@ import { routes, RouteData } from "../data/routes";
 const RouteCard = ({ route }: { route: RouteData }) => {
   return (
     <motion.li
-      whileHover={{ scale: 1.02 }}
+      whileHover={{ y: -5 }}
       whileTap={{ scale: 0.98 }}
-      className="list-none"
+      className="list-none h-full"
     >
-      <Link href={`/routes/${route.slug}`} className="block">
-        <div className="w-full group bg-[#131A22] border border-white/10 hover:border-[#FFC107]/50 hover:shadow-[0_0_15px_rgba(255,193,7,0.2)] rounded-xl p-4 md:p-5 flex items-center justify-between transition-all duration-300 text-left">
-          <div className="flex items-center gap-4">
-            <div className="w-10 h-10 rounded-full bg-white/5 flex items-center justify-center group-hover:bg-[#FFC107]/10 transition-colors">
-              <CarFront className="w-5 h-5 text-gray-400 group-hover:text-[#FFC107] transition-colors" />
+      <Link href={`/routes/${route.slug}`} className="block h-full">
+        <div className="relative h-full w-full group bg-gradient-to-br from-[#131A22] to-[#0B0F14] border border-white/5 hover:border-[#FFC107]/40 hover:shadow-[0_8px_30px_rgba(255,193,7,0.12)] rounded-2xl p-5 flex flex-col justify-between transition-all duration-500 overflow-hidden">
+          
+          {/* Subtle Background Glow on Hover */}
+          <div className="absolute inset-0 bg-gradient-to-br from-[#FFC107]/5 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500 pointer-events-none" />
+
+          {/* TOP SECTION */}
+          <div className="relative z-10 flex items-start justify-between mb-4">
+            <div className="flex items-center gap-3">
+              <div className="relative w-12 h-12 rounded-full bg-[#1A222C] flex items-center justify-center group-hover:bg-[#FFC107]/20 transition-colors duration-500 shadow-inner border border-white/5 group-hover:border-[#FFC107]/30 shrink-0">
+                <CarFront className="w-6 h-6 text-gray-400 group-hover:text-[#FFC107] transition-colors duration-500" />
+                <div className="absolute inset-0 rounded-full border border-[#FFC107] opacity-0 group-hover:opacity-30 scale-110 group-hover:scale-100 transition-all duration-500" />
+              </div>
+              <div className="min-w-0">
+                <h3 className="text-white font-bold text-base md:text-lg group-hover:text-[#FFC107] transition-colors duration-300 truncate">
+                  {route.from} <span className="text-gray-500 font-normal text-xs mx-1">to</span> {route.to}
+                </h3>
+                <div className="flex flex-wrap items-center gap-2 mt-1.5">
+                  <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-white/5 text-gray-400 border border-white/10 group-hover:border-[#FFC107]/30 group-hover:text-[#FFC107]/80 transition-colors whitespace-nowrap">
+                    One Way
+                  </span>
+                  <span className="text-[10px] uppercase tracking-wider font-semibold px-2 py-0.5 rounded-full bg-[#FFC107]/10 text-[#FFC107] border border-[#FFC107]/20 whitespace-nowrap">
+                    Popular
+                  </span>
+                </div>
+              </div>
             </div>
-            <div>
-              <span className="text-white font-medium md:text-lg group-hover:text-[#FFC107] transition-colors block">
-                {route.from} to {route.to}
+          </div>
+
+          {/* MIDDLE SECTION */}
+          <div className="relative z-10 py-4 border-y border-white/5 my-2 flex justify-between items-center group-hover:border-white/10 transition-colors">
+            <div className="flex flex-col">
+              <span className="text-xs text-gray-500 mb-1">Distance</span>
+              <span className="text-sm font-medium text-gray-300">{route.distance} km</span>
+            </div>
+            <div className="w-[1px] h-8 bg-white/5" />
+            <div className="flex flex-col text-right">
+              <span className="text-xs text-gray-500 mb-1">Est. Fare</span>
+              <span className="text-sm font-bold text-white group-hover:text-[#FFC107] transition-colors">
+                ₹{route.prices.sedan} <span className="text-xs text-gray-500 font-normal">up</span>
               </span>
-              {route.distance && (
-                <span className="text-gray-400 text-sm">{route.distance} km</span>
-              )}
             </div>
           </div>
-          <div className="hidden sm:flex items-center gap-2 text-xs font-bold text-[#0B0F14] bg-[#FFC107] px-3 py-1.5 rounded-full opacity-0 group-hover:opacity-100 transition-opacity transform translate-x-4 group-hover:translate-x-0">
-            View Details
+
+          {/* BOTTOM SECTION */}
+          <div className="relative z-10 flex items-center justify-between mt-4">
+            <span className="text-sm font-medium text-gray-400 group-hover:text-white transition-colors duration-300">
+              View Details
+            </span>
+            <button className="px-5 py-2 bg-[#FFC107] text-[#0B0F14] text-sm font-bold rounded-full shadow-[0_0_10px_rgba(255,193,7,0.2)] hover:shadow-[0_0_15px_rgba(255,193,7,0.4)] group-hover:scale-105 transition-all duration-300 md:translate-y-1 md:group-hover:translate-y-0 md:opacity-90 md:group-hover:opacity-100">
+              Book Now
+            </button>
           </div>
+          
         </div>
       </Link>
     </motion.li>
@@ -148,7 +184,9 @@ export default function PopularRoutes() {
         </motion.div>
 
         {/* Routes Content */}
-        <div className="max-w-5xl mx-auto">
+
+        
+         <div className="max-w-5xl mx-auto">
           {searchQuery.trim() !== "" ? (
             <motion.div 
               initial={{ opacity: 0 }}
@@ -188,7 +226,8 @@ export default function PopularRoutes() {
               ))}
             </motion.div>
           )}
-        </div>
+        </div> 
+
 
         {/* Call to Action */}
         <motion.div 
@@ -210,6 +249,11 @@ export default function PopularRoutes() {
         </motion.div>
 
       </div>
+
+
+
+
+      
     </section>
   );
 }
