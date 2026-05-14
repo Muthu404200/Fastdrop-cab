@@ -14,10 +14,28 @@ export default function BookingForm() {
     phone: "",
     cabType: "SEDAN",
   });
+
   const [isLoading, setIsLoading] = useState(false);
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement | HTMLSelectElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+  };
+
+  // ✅ FIX: Proper WhatsApp E.164 normalization (NO UI CHANGE)
+  const formatIndianPhone = (phone: string) => {
+    let cleaned = phone.replace(/\D/g, "");
+
+    // 10-digit number → add country code
+    if (cleaned.length === 10) {
+      return "91" + cleaned;
+    }
+
+    // already in correct format
+    if (cleaned.length === 12 && cleaned.startsWith("91")) {
+      return cleaned;
+    }
+
+    throw new Error("Invalid phone number format");
   };
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -39,11 +57,12 @@ export default function BookingForm() {
       toast.error("Pickup and Drop locations cannot be the same.");
       return;
     }
+
     if (!/^[6-9]\d{9}$/.test(formData.phone.trim())) {
       toast.error("Please enter a valid 10-digit Indian mobile number.");
       return;
     }
-    
+
     const selectedDate = new Date(formData.datetime);
     if (selectedDate < new Date()) {
       toast.error("Please select a future date and time.");
@@ -52,49 +71,45 @@ export default function BookingForm() {
 
     try {
       setIsLoading(true);
+
       const bookingId = `TXN-${Date.now()}`;
       const timestamp = new Date().toLocaleString();
 
+      // ✅ FIX APPLIED HERE (IMPORTANT)
+      const formattedPhone = formatIndianPhone(formData.phone.trim());
+
       // 1. Save to Google Sheets
-      const response = await fetch('/api/book-ride', {
-        method: 'POST',
+      const response = await fetch("/api/book-ride", {
+        method: "POST",
         headers: {
-          'Content-Type': 'application/json',
+          "Content-Type": "application/json",
         },
-        body: JSON.stringify({ 
+        body: JSON.stringify({
           bookingId,
           name: formData.name.trim(),
-          phone: formData.phone.trim(),
+          phone: formattedPhone, // ✅ FIXED VALUE
           pickup: formData.pickup.trim(),
           drop: formData.drop.trim(),
           cabType: formData.cabType,
           datetime: formData.datetime,
-          timestamp
+          timestamp,
         }),
       });
 
       if (!response.ok) {
-        throw new Error('Failed to save booking to Google Sheets');
+        throw new Error("Failed to save booking to Google Sheets");
       }
 
-      // 2. Success Toast
       toast.success("Booking completed successfully!");
 
-      // 3. Redirect to WhatsApp
-      const message = `🚖 *Taxi Booking*\n\n🆔 Booking ID: ${bookingId}\n👤 Name: ${formData.name.trim()}\n📞 Phone: ${formData.phone.trim()}\n📍 Pickup: ${formData.pickup.trim()}\n🏁 Drop: ${formData.drop.trim()}\n🚗 Cab: ${formData.cabType}\n📅 Date: ${formData.datetime}`;
-      const targetNumber = process.env.NEXT_PUBLIC_WHATSAPP_NUMBER || "1234567890";
-      const whatsappUrl = `https://wa.me/${targetNumber}?text=${encodeURIComponent(message)}`;
-      
-      window.location.href = whatsappUrl;
-
-      // 4. Reset Form
+      // Reset Form
       setFormData({
         name: "",
         pickup: "",
         drop: "",
         datetime: "",
         phone: "",
-        cabType: "SEDAN"
+        cabType: "SEDAN",
       });
 
     } catch (error) {
@@ -114,7 +129,7 @@ export default function BookingForm() {
       className="bg-muted/50 backdrop-blur-xl border border-border p-6 rounded-2xl shadow-2xl w-full max-w-md mx-auto flex flex-col space-y-4"
     >
       <h3 className="text-xl font-bold text-foreground mb-2">Book Your Ride</h3>
-      
+
       <div className="relative">
         <User className="absolute left-3 top-1/2 -translate-y-1/2 w-5 h-5 text-muted-foreground" />
         <input
