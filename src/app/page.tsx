@@ -8,6 +8,7 @@ import TrustSection from "@/components/TrustSection";
 import TariffSection from "@/components/TariffSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
+import Hero2 from "@/components/Hero2";
 
 export default function Home() {
   return (
@@ -15,7 +16,8 @@ export default function Home() {
       <Preloader />
       <Navbar />
       <main className="flex-1 flex flex-col">
-        <Hero />
+        {/* <Hero /> */}
+        <Hero2 />
         <TariffSection />
         <QuickContact />
         <PopularRoutes />
