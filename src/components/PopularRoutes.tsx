@@ -236,16 +236,6 @@ export default function PopularRoutes() {
           viewport={{ once: true }}
           className="mt-20 text-center"
         >
-          <p className="text-xl text-gray-300 mb-6">Didn't find your route?</p>
-          <a
-            href="https://wa.me/1234567890?text=Hello%2C%20I%20want%20to%20book%20a%20custom%20ride."
-            target="_blank"
-            rel="noopener noreferrer"
-            className="inline-flex items-center gap-3 bg-[#FFC107] hover:bg-[#ffb000] text-[#0B0F14] font-bold py-4 px-8 rounded-full shadow-[0_4px_20px_rgba(255,193,7,0.3)] hover:shadow-[0_6px_25px_rgba(255,193,7,0.4)] transition-all hover:scale-105"
-          >
-            <MessageCircle className="w-6 h-6" />
-            Book Custom Ride on WhatsApp
-          </a>
         </motion.div>
 
       </div>

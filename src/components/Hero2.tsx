@@ -47,7 +47,7 @@ export default function Hero2() {
               
               {/* Call Button */}
               <a
-                href="tel:+919876543210"
+                href="tel:+919566197139"
                 className="group inline-flex items-center justify-center gap-3 px-6 py-4 rounded-2xl bg-primary text-primary-foreground font-semibold shadow-lg hover:scale-105 transition-all duration-300 w-full sm:w-auto"
               >
                 <Phone className="w-5 h-5" />
@@ -56,7 +56,7 @@ export default function Hero2() {
 
               {/* WhatsApp Button */}
               <a
-                href="https://wa.me/919876543210"
+                href="https://wa.me/9566197139"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="group inline-flex items-center justify-center gap-3 px-6 py-4 rounded-2xl border border-border bg-background hover:bg-muted font-semibold transition-all duration-300 w-full sm:w-auto"

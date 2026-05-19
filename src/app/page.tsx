@@ -9,6 +9,7 @@ import TariffSection from "@/components/TariffSection";
 import CTA from "@/components/CTA";
 import Footer from "@/components/Footer";
 import Hero2 from "@/components/Hero2";
+import Location from "@/components/Location";
 
 export default function Home() {
   return (
@@ -23,7 +24,8 @@ export default function Home() {
         <PopularRoutes />
         <WhyChooseUs />
         <TrustSection />
-        <CTA />
+        <Location />
+        {/* <CTA /> */}
       </main>
       <Footer />
     </>

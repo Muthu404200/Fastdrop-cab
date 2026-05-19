@@ -45,7 +45,7 @@ export default function Navbar() {
 
           {/* Call Button */}
           <a
-            href="tel:+6380831605"
+            href="tel:+919566197139"
             className="flex items-center justify-center gap-2
             text-sm font-medium text-foreground hover:text-primary
             transition-colors px-3 py-2 rounded-full
@@ -55,12 +55,13 @@ export default function Navbar() {
             <Phone className="w-4 h-4" />
 
             {/* Desktop only text */}
+            
             <span className="hidden md:block">Call Now</span>
           </a>
 
           {/* WhatsApp Button */}
           <a
-            href="https://wa.me/6380831605"
+            href="https://wa.me/+919566197139"
             target="_blank"
             rel="noopener noreferrer"
             className="flex items-center gap-2

@@ -23,18 +23,20 @@ export default function Footer() {
               <li>
                 <a href="tel:+1234567890" className="flex items-center text-muted-foreground hover:text-primary transition-colors">
                   <Phone className="w-5 h-5 mr-3" />
-                  +1 (234) 567-890
+                  +919566197139
                 </a>
               </li>
               <li>
-                <a href="https://wa.me/1234567890" target="_blank" rel="noopener noreferrer" className="flex items-center text-muted-foreground hover:text-primary transition-colors">
+                <a href="https://wa.me/+919566197139" target="_blank" rel="noopener noreferrer" className="flex items-center text-muted-foreground hover:text-primary transition-colors">
                   <MessageCircle className="w-5 h-5 mr-3" />
                   WhatsApp Chat
                 </a>
               </li>
               <li className="flex items-start text-muted-foreground">
                 <MapPin className="w-5 h-5 mr-3 shrink-0" />
-                <span>123 Taxi Rank, Business District, City 10001</span>
+                <span>
+                  42, Thulukanathamman Koil St, Udayar Palayam Nagar, Ragavendra Colony, Chennai, Tamil Nadu 600058
+                </span>
               </li>
             </ul>
           </div>

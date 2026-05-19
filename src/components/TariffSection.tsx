@@ -239,7 +239,7 @@ export default function TariffSection() {
           className="mt-16 text-center"
         >
           <a
-            href="https://wa.me/1234567890"
+            href="https://wa.me/+919566197139"
             target="_blank"
             rel="noopener noreferrer"
             className="inline-flex items-center gap-2 bg-[#FFC107] hover:bg-[#ffb000] text-white font-bold py-4 px-8 rounded-full shadow-[0_4px_15px_rgba(37,211,102,0.3)] hover:shadow-[0_6px_20px_rgba(37,211,102,0.4)] transition-all hover:scale-105"
